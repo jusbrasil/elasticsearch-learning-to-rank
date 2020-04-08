@@ -230,6 +230,14 @@ public class PostingsExplorerQuery extends Query {
                 positions.add((float) this.postingsEnum.nextPosition() + 1);
             }
 
+            if (this.typeConditional.contains("_at")){
+                int atPosition = Integer.parseInt(this.typeConditional.split("_")[1].split("at")[1]);
+                if (atPosition <= this.postingsEnum.freq() && atPosition > 0){
+                    return positions.get(atPosition-1);
+                }
+                return 0.0f;
+            }
+
             float retval;
             switch(this.typeConditional) {
                 case("avg_raw_tp"):

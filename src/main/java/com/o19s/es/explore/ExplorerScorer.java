@@ -67,34 +67,50 @@ public class ExplorerScorer extends Scorer {
         }
 
         float retval;
-        switch(type) {
-            case("sum_raw_tf"):
-            case("sum_idf_x_tf"):
-                retval = tf_stats.getSum();
-                break;
-            case("mean_raw_tf"):
-                retval = tf_stats.getMean();
-                break;
-            case("max_raw_tf"):
-            case("max_raw_tp"):
-            case("max_idf_x_tf"):
-                retval = tf_stats.getMax();
-                break;
-            case("min_raw_tf"):
-            case("min_raw_tp"):
-            case("min_idf_x_tf"):
-                retval = tf_stats.getMin();
-                break;
-            case("stddev_raw_tf"):
-            case("stddev_idf_x_tf"):
-                retval = tf_stats.getStdDev();
-                break;
-            case("avg_raw_tp"):
-            case("avg_idf_x_tf"):
-                retval = tf_stats.getMean();
-                break;
-            default:
-                throw new RuntimeException("Invalid stat type specified.");
+        if (type.contains("_at") && type.endsWith("_tp")){
+            switch(type.split("_")[0]) {
+                case("max"):
+                    retval = tf_stats.getMax();
+                    break;
+                case("min"):
+                    retval = tf_stats.getMin();
+                    break;
+                case("avg"):
+                    retval = tf_stats.getMean();
+                    break;
+                default:
+                    throw new RuntimeException("Invalid position stat type specified.");
+            }
+        }else{
+            switch(type) {
+                case("sum_raw_tf"):
+                case("sum_idf_x_tf"):
+                    retval = tf_stats.getSum();
+                    break;
+                case("mean_raw_tf"):
+                    retval = tf_stats.getMean();
+                    break;
+                case("max_raw_tf"):
+                case("max_raw_tp"):
+                case("max_idf_x_tf"):
+                    retval = tf_stats.getMax();
+                    break;
+                case("min_raw_tf"):
+                case("min_raw_tp"):
+                case("min_idf_x_tf"):
+                    retval = tf_stats.getMin();
+                    break;
+                case("stddev_raw_tf"):
+                case("stddev_idf_x_tf"):
+                    retval = tf_stats.getStdDev();
+                    break;
+                case("avg_raw_tp"):
+                case("avg_idf_x_tf"):
+                    retval = tf_stats.getMean();
+                    break;
+                default:
+                    throw new RuntimeException("Invalid stat type specified.");
+            }
         }
 
         return retval;
