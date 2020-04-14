@@ -2,7 +2,7 @@ VERSION ?= $(shell grep ^version build/generated-resources/plugin-descriptor.pro
 
 deploy.nexus:
 	mvn deploy:deploy-file \
-		-DgroupId=com.jusbrasil.elasticsearch \
+		-DgroupId=br.com.jusbrasil.elasticsearch \
 		-DartifactId=ltr \
 		-Dversion=$(VERSION) \
 		-Dpackaging=jar \
