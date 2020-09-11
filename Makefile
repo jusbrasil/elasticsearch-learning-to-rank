@@ -8,4 +8,4 @@ deploy.nexus:
 		-Dpackaging=jar \
 		-Dfile=build/distributions/ltr-$(VERSION).jar \
 		-DrepositoryId=jusbrasil \
-		-Durl=http://nexus.apps.jusbr.com/repository/maven-releases/
+		-Durl=https://nexus.apps.jusbr.com/repository/maven-releases/
